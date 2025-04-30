@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  notificationservice:
+    build:
+      context: ./notificationservice
+      dockerfile: DockerFile
+    ports:
+      - "50051:50051"
+      - "3001:3001"
+   
+  userservice:
+    build:
+      context: ./userservice
+      dockerfile: DockerFile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - notificationservice
+
+  workerservice:
+    build:
+      context: ./workerservice
+      dockerfile: DockerFile
+    depends_on:
+      - notificationservice

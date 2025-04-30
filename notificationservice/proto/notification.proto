@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package proto;
+
+option go_package = "./proto;proto";
+
+service NotificationService {
+  rpc Logout (LogoutRequest) returns (LogoutResponse);
+  rpc PushMessage (PushMessageRequest) returns (PushMessageResponse);
+}
+
+message LogoutRequest {
+  string userid = 1;
+}
+
+message LogoutResponse {
+  bool success = 1;
+}
+
+message PushMessageRequest {
+  string sender = 1;
+  repeated string recipients = 2;
+  string message = 3;
+}
+
+message PushMessageResponse {
+  bool success = 1;
+}
